@@ -80,6 +80,8 @@ namespace itk
 template <typename TPixel, unsigned int VImageDimension = 2> class Dream3DImage : public Image<TPixel, VImageDimension>
 {
 public:
+  ITK_DISALLOW_COPY_AND_ASSIGN(Dream3DImage);
+
   /** Standard class typedefs */
   typedef Dream3DImage Self;
   typedef Image<TPixel, VImageDimension> Superclass;
@@ -269,9 +271,6 @@ protected:
   }
 
 private:
-  Dream3DImage(const Self&) = delete;
-  void operator=(const Self&) = delete;
-
   /** Memory for the current buffer. */
   PixelContainerPointer m_TemplatedBuffer;
 };
