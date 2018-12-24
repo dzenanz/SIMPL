@@ -185,7 +185,7 @@ InPlaceImageToDream3DDataFilter<PixelType, VDimension>
 template<typename PixelType, unsigned int VDimension>
 void
 InPlaceImageToDream3DDataFilter<PixelType, VDimension>
-::CheckValidArrayPathComponentName(std::string var)
+::CheckValidArrayPathComponentName(std::string var) const
 {
   if (var.find('/') != std::string::npos)
   {
@@ -202,7 +202,7 @@ InPlaceImageToDream3DDataFilter<PixelType, VDimension>
 template<typename PixelType, unsigned int VDimension>
 void
 InPlaceImageToDream3DDataFilter<PixelType, VDimension>
-::VerifyPreconditions()
+::VerifyPreconditions() ITKv5_CONST
 {
   //Test only works if image if of dimension 2 or 3
   if (VDimension != 2 && VDimension != 3)
@@ -212,7 +212,7 @@ InPlaceImageToDream3DDataFilter<PixelType, VDimension>
   CheckValidArrayPathComponentName(m_AttributeMatrixArrayName);
   CheckValidArrayPathComponentName(m_DataArrayName);
   // Verify data container
-  DecoratorType *outputPtr = this->GetOutput();
+  DecoratorType *outputPtr = const_cast<Self*>(this)->GetOutput();
   if (!outputPtr->Get())
   {
     itkExceptionMacro("Data container not set");
